@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>花雨</title>
+    <meta name="keywords" content="花雨"/>
+    <meta name="description" content="花雨"/>
+    <link rel="shortcut icon" href="https://img.qlcc.cc/%E6%A0%B9%E7%9B%AE%E5%BD%95/e947c36d-8aee-4abd-9b04-1f00b8933b96.jpg" type="image/x-icon"/>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+            background:#fff;
+            color:#333;
+            height:100%
+        }
+        .search-page{
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+        }
+        .logo-link img{
+            width:80%;
+            max-width:320px;
+            margin-bottom:30px;
+            user-select:none;
+            -webkit-user-drag:none;
+            border-radius:8px;
+        }
+        .search-box{
+            display:flex;
+            align-items:center;
+            width:100%;
+            max-width:520px;
+            border:2px solid #e0e0e0;
+            border-radius:30px;
+            padding:5px 12px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s;
+        }
+        .search-box:focus-within{
+            border-color:#4285f4;
+            box-shadow:0 2px 10px rgba(66,133,244,0.15);
+        }
+        .search-box input{
+            flex:1;
+            border:none;
+            outline:none;
+            padding:12px 14px;
+            font-size:16px;
+            color:#333;
+        }
+        .search-box button{
+            background:none;
+            border:none;
+            padding:8px;
+            cursor:pointer;
+            color:#666;
+            transition: color 0.2s;
+        }
+        .search-box button:hover{
+            color:#4285f4;
+        }
+        .search-box svg{
+            width:22px;
+            height:22px;
+        }
+        .direct-link{
+            margin-top:18px;
+        }
+        .direct-link a{
+            color:#1a73e8;
+            font-size:15px;
+            text-decoration:none;
+        }
+        .direct-link a:hover{
+            text-decoration:underline;
+        }
+        #loading{
+            position:fixed;
+            top:0;left:0;
+            width:100%;height:100%;
+            background:#fff;
+            z-index:99999;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+        }
+        .spin{
+            width:40px;
+            height:40px;
+            border:4px solid #f3f3f3;
+            border-top:4px solid #4285f4;
+            border-radius:50%;
+            animation:spin 1s linear infinite;
+        }
+        @keyframes spin{
+            0%{transform:rotate(0deg)}
+            100%{transform:rotate(360deg)}
+        }
+        .load-text{
+            margin-top:12px;
+            font-size:14px;
+            color:#666;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loading">
+    <div class="spin"></div>
+    <div class="load-text">搜索中...</div>
+</div>
+
+<div class="search-page">
+    <a href="https://pan.qlcc.cc" target="_blank" rel="noopener noreferrer" class="logo-link">
+        <!-- 已替换为你提供的新Logo -->
+        <img src="https://img.qlcc.cc/%E6%A0%B9%E7%9B%AE%E5%BD%95/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17739319801736.png" alt="花雨" draggable="false"/>
+    </a>
+
+    <form class="search-box" method="GET" action="https://pan.qlcc.cc/" onsubmit="showLoading()">
+        <input type="text" name="q" placeholder="检索..." autocomplete="off"/>
+        <button type="submit">
+            <svg fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z"/>
+            </svg>
+        </button>
+    </form>
+
+    <div class="direct-link">
+        <a href="https://pan.qlcc.cc" target="_blank" rel="noopener noreferrer">点此直接跳转网盘</a>
+    </div>
+</div>
+
+<script>
+function showLoading(){
+    document.getElementById('loading').style.display='flex'
+}
+window.addEventListener('load',function(){
+    setTimeout(()=>{
+        document.getElementById('loading').style.display='none'
+    },300)
+})
+window.addEventListener('pageshow',function(e){
+    if(e.persisted || (window.performance && window.performance.navigation.type===2)){
+        document.getElementById('loading').style.display='none'
+    }
+})
+</script>
+
+</body>
+</html>
