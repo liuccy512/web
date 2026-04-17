@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>花雨</title>
-    <meta name="keywords" content="花雨,花雨网盘,网盘搜索"/>
-    <meta name="description" content="花雨网盘 - 快速检索网盘资源"/>
+    <title>QLCC</title>
+    <meta name="keywords" content="QLCC,QLCC网盘,网盘搜索"/>
+    <meta name="description" content="QLCC网盘 - 快速检索网盘资源"/>
     <link rel="shortcut icon" href="https://img.qlcc.cc/%E6%A0%B9%E7%9B%AE%E5%BD%95/e947c36d-8aee-4abd-9b04-1f00b8933b96.jpg" type="image/x-icon"/>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
@@ -24,6 +24,16 @@
             align-items:center;
             padding:20px;
             min-height:500px;
+            gap: 30px; /* 控制Logo和搜索框间距 */
+        }
+        /* ========== QLCC-CC Logo 样式 ========== */
+        .logo{
+            font-size: 48px;
+            font-weight: 900;
+            color: #1a73e8;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(66,133,244,0.15);
+            user-select: none;
         }
         .search-box{
             display:flex;
@@ -69,7 +79,7 @@
             height:22px;
         }
         .direct-link{
-            margin-top:20px;
+            margin-top:10px;
         }
         .direct-link a{
             color:#1a73e8;
@@ -127,11 +137,14 @@
 </div>
 
 <div class="search-page">
+    <!-- Logo 位置 -->
+    <div class="logo">QLCC-CC</div>
+
     <form class="search-box" action="https://pcn3wkl0rk28.feishu.cn/drive/folder/Iq7LfOopKl0t3ZdFLYjcTcEzn7e" onsubmit="return showLoading()">
-        <input type="text" placeholder="检索资源..." autocomplete="off" autofocus/>
+        <input type="text" name="search" placeholder="检索资源..." autocomplete="off" autofocus/>
         <button type="submit">
             <svg fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z"/>
+                <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg>
         </button>
     </form>
