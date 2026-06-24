@@ -3,146 +3,173 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>QLCC</title>
-    <meta name="keywords" content="QLCC,QLCC网盘,网盘搜索"/>
-    <meta name="description" content="QLCC网盘 - 快速检索网盘资源"/>
+    <title>QLCC网盘 - 资源检索</title>
+    <meta name="keywords" content="QLCC,QLCC网盘,网盘搜索,飞书网盘资源检索"/>
+    <meta name="description" content="QLCC网盘快速检索平台，一键直达飞书云盘资源文件夹"/>
     <link rel="shortcut icon" href="https://img.qlcc.cc/%E6%A0%B9%E7%9B%AE%E5%BD%95/e947c36d-8aee-4abd-9b04-1f00b8933b96.jpg" type="image/x-icon"/>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        html,body{
-            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-            background:#fff;
-            color:#333;
-            height:100%;
-            overflow-x:hidden;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
         }
-        .search-page{
-            height:100vh;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            padding:20px;
-            min-height:500px;
-            gap: 30px; /* 控制Logo和搜索框间距 */
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #ffffff;
+            color: #333333;
+            height: 100%;
+            overflow-x: hidden;
         }
-        /* ========== QLCC-CC Logo 样式 ========== */
-        .logo{
-            font-size: 48px;
-            font-weight: 900;
-            color: #1a73e8;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 8px rgba(66,133,244,0.15);
+        /* 主体居中容器整体上移，超大间距分隔标题与搜索框 */
+        .search-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 520px;
+            gap: 90px;
+            transform: translateY(-100px);
+        }
+        /* 标题放大，无下边距 */
+        .page-title {
+            font-size: 32px;
+            color: #5f6368;
+            font-weight: 500;
+            letter-spacing: 0.5px;
             user-select: none;
+            margin-bottom: 0;
         }
-        .search-box{
-            display:flex;
-            align-items:center;
-            width:100%;
-            max-width:540px;
-            border:2px solid #e0e0e0;
-            border-radius:30px;
-            padding:5px 12px;
-            box-shadow:0 2px 8px rgba(0,0,0,0.06);
-            transition: all 0.2s;
+        /* 搜索框容器 */
+        .search-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 560px;
+            border: 2px solid #e8e8e8;
+            border-radius: 999px;
+            padding: 6px 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.24s ease;
         }
-        .search-box:focus-within{
-            border-color:#4285f4;
-            box-shadow:0 2px 12px rgba(66,133,244,0.18);
+        .search-box:focus-within {
+            border-color: #4285f4;
+            box-shadow: 0 3px 14px rgba(66, 133, 244, 0.2);
         }
-        .search-box input{
-            flex:1;
-            border:none;
-            outline:none;
-            padding:13px 15px;
-            font-size:16px;
-            color:#333;
-            background:transparent;
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 14px 16px;
+            font-size: 16px;
+            color: #222;
+            background: transparent;
         }
-        .search-box button{
-            background:none;
-            border:none;
-            padding:10px;
-            cursor:pointer;
-            color:#666;
-            transition: color 0.2s;
-            border-radius:50%;
-            display:grid;
-            place-items:center;
+        .search-box input::placeholder {
+            color: #999;
         }
-        .search-box button:hover{
-            color:#4285f4;
-            background:#f5f9ff;
+        .search-box button {
+            background: none;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.2s ease;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
         }
-        .search-box svg{
-            width:22px;
-            height:22px;
+        .search-box button:hover {
+            color: #4285f4;
+            background: #f1f7ff;
         }
-        .direct-link{
-            margin-top:10px;
+        .search-box svg {
+            width: 22px;
+            height: 22px;
         }
-        .direct-link a{
-            color:#1a73e8;
-            font-size:15px;
-            text-decoration:none;
-            padding:6px 10px;
-            border-radius:6px;
-            transition:all 0.2s;
+        /* 直达链接 */
+        .direct-link {
+            margin-top: 4px;
         }
-        .direct-link a:hover{
-            text-decoration:underline;
-            background:#f1f7ff;
+        .direct-link a {
+            color: #1a73e8;
+            font-size: 15px;
+            text-decoration: none;
+            padding: 7px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
-        #loading{
-            position:fixed;
-            top:0;left:0;
-            width:100%;height:100%;
-            background:#fff;
-            z-index:99999;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            opacity:1;
-            transition:opacity 0.3s ease;
+        .direct-link a:hover {
+            text-decoration: underline;
+            background: #f1f7ff;
         }
-        #loading.hidden{
-            opacity:0;
-            pointer-events:none;
+        /* 全局加载遮罩 */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .spin{
-            width:42px;
-            height:42px;
-            border:4px solid #f3f3f3;
-            border-top:4px solid #4285f4;
-            border-radius:50%;
-            animation:spin 1s linear infinite;
+        #loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
-        @keyframes spin{
-            0%{transform:rotate(0deg)}
-            100%{transform:rotate(360deg)}
+        .spin {
+            width: 44px;
+            height: 44px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4285f4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
-        .load-text{
-            margin-top:14px;
-            font-size:14px;
-            color:#666;
+        @keyframes spin {
+            0% { transform: rotate(0deg) }
+            100% { transform: rotate(360deg) }
+        }
+        .load-text {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #666;
+        }
+        /* 底部小字补充 */
+        .tips {
+            position: fixed;
+            bottom: 30px;
+            font-size: 13px;
+            color: #999;
         }
     </style>
 </head>
 <body>
-
+<!-- 全局加载遮罩 -->
 <div id="loading">
     <div class="spin"></div>
-    <div class="load-text">搜索中...</div>
+    <div class="load-text">页面加载中...</div>
 </div>
 
+<!-- 主搜索区域 -->
 <div class="search-page">
-    <!-- Logo 位置 -->
-    <div class="logo">QLCC-CC</div>
+    <div class="page-title">Hello there! 🎉</div>
 
-    <form class="search-box" action="https://pcn3wkl0rk28.feishu.cn/drive/folder/Iq7LfOopKl0t3ZdFLYjcTcEzn7e" onsubmit="return showLoading()">
-        <input type="text" name="search" placeholder="检索资源..." autocomplete="off" autofocus/>
-        <button type="submit">
+    <!-- 搜索表单 -->
+    <form class="search-box" 
+          action="https://pcn3wkl0rk28.feishu.cn/drive/folder/Iq7LfOopKl0t3ZdFLYjcTcEzn7e" 
+          target="_blank"
+          onsubmit="return showLoading()">
+        <input type="text" name="search" placeholder="输入关键词检索资源..." autocomplete="off" autofocus/>
+        <button type="submit" aria-label="搜索">
             <svg fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg>
@@ -154,34 +181,31 @@
     </div>
 </div>
 
+<!-- 底部提示文字 -->
+<div class="tips">QLCC网盘资源检索平台 © 2026</div>
+
 <script>
-function showLoading(){
-    const loading = document.getElementById('loading');
-    loading.style.display = 'flex';
-    loading.classList.remove('hidden');
+const loadingDom = document.getElementById('loading');
+
+// 提交表单显示加载动画
+function showLoading() {
+    loadingDom.classList.remove('hidden');
     return true;
 }
 
-window.addEventListener('load', function(){
-    setTimeout(()=>{
-        const loading = document.getElementById('loading');
-        loading.classList.add('hidden');
-        setTimeout(()=>{
-            loading.style.display = 'none';
-        }, 300);
+// 页面首次加载完成后关闭loading
+window.addEventListener('load', function () {
+    setTimeout(() => {
+        loadingDom.classList.add('hidden');
     }, 350);
 });
 
-window.addEventListener('pageshow', function(e){
-    if(e.persisted || (window.performance && window.performance.navigation.type === 2)){
-        const loading = document.getElementById('loading');
-        loading.classList.add('hidden');
-        setTimeout(()=>{
-            loading.style.display = 'none';
-        }, 300);
+// 浏览器后退/缓存页面恢复时关闭loading
+window.addEventListener('pageshow', function (e) {
+    if (e.persisted || window.performance?.navigation.type === 2) {
+        loadingDom.classList.add('hidden');
     }
 });
 </script>
-
 </body>
 </html>
