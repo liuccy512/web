@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>QLCC网盘 - 资源检索</title>
-    <meta name="keywords" content="QLCC,QLCC网盘,网盘搜索,飞书网盘资源检索"/>
-    <meta name="description" content="QLCC网盘快速检索平台，一键直达飞书云盘资源文件夹"/>
+    <title>cc - 资源检索</title>
+    <meta name="keywords" content="cc,网盘搜索,飞书网盘资源检索"/>
+    <meta name="description" content="cc快速检索平台，一键直达飞书云盘资源文件夹"/>
     <link rel="shortcut icon" href="https://img.qlcc.cc/%E6%A0%B9%E7%9B%AE%E5%BD%95/e947c36d-8aee-4abd-9b04-1f00b8933b96.jpg" type="image/x-icon"/>
     <style>
         * {
@@ -20,7 +20,6 @@
             height: 100%;
             overflow-x: hidden;
         }
-        /* 主体居中容器整体上移，超大间距分隔标题与搜索框 */
         .search-page {
             height: 100vh;
             display: flex;
@@ -32,7 +31,6 @@
             gap: 90px;
             transform: translateY(-100px);
         }
-        /* 标题放大，无下边距 */
         .page-title {
             font-size: 32px;
             color: #5f6368;
@@ -41,13 +39,12 @@
             user-select: none;
             margin-bottom: 0;
         }
-        /* 搜索框容器 */
         .search-box {
             display: flex;
             align-items: center;
             width: 100%;
             max-width: 560px;
-            border: 2px solid #e8e8e8;
+            border: 2px solid #4285f4;
             border-radius: 999px;
             padding: 6px 14px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -55,7 +52,7 @@
         }
         .search-box:focus-within {
             border-color: #4285f4;
-            box-shadow: 0 3px 14px rgba(66, 133, 244, 0.2);
+            box-shadow: 0 3px 14px rgba(66, 133, 244, 0.25);
         }
         .search-box input {
             flex: 1;
@@ -88,7 +85,6 @@
             width: 22px;
             height: 22px;
         }
-        /* 直达链接 */
         .direct-link {
             margin-top: 4px;
         }
@@ -104,7 +100,6 @@
             text-decoration: underline;
             background: #f1f7ff;
         }
-        /* 全局加载遮罩 */
         #loading {
             position: fixed;
             top: 0;
@@ -143,27 +138,16 @@
             font-size: 14px;
             color: #666;
         }
-        /* 底部小字补充 */
-        .tips {
-            position: fixed;
-            bottom: 30px;
-            font-size: 13px;
-            color: #999;
-        }
     </style>
 </head>
 <body>
-<!-- 全局加载遮罩 -->
 <div id="loading">
     <div class="spin"></div>
     <div class="load-text">页面加载中...</div>
 </div>
 
-<!-- 主搜索区域 -->
 <div class="search-page">
     <div class="page-title">Hello there! 🎉</div>
-
-    <!-- 搜索表单 -->
     <form class="search-box" 
           action="https://pcn3wkl0rk28.feishu.cn/drive/folder/Iq7LfOopKl0t3ZdFLYjcTcEzn7e" 
           target="_blank"
@@ -175,32 +159,20 @@
             </svg>
         </button>
     </form>
-
     <div class="direct-link">
         <a href="https://pcn3wkl0rk28.feishu.cn/drive/folder/Iq7LfOopKl0t3ZdFLYjcTcEzn7e" target="_blank" rel="noopener noreferrer">点此直接跳转网盘</a>
     </div>
 </div>
 
-<!-- 底部提示文字 -->
-<div class="tips">QLCC网盘资源检索平台 © 2026</div>
-
 <script>
 const loadingDom = document.getElementById('loading');
-
-// 提交表单显示加载动画
 function showLoading() {
     loadingDom.classList.remove('hidden');
     return true;
 }
-
-// 页面首次加载完成后关闭loading
 window.addEventListener('load', function () {
-    setTimeout(() => {
-        loadingDom.classList.add('hidden');
-    }, 350);
+    setTimeout(() => loadingDom.classList.add('hidden'), 350);
 });
-
-// 浏览器后退/缓存页面恢复时关闭loading
 window.addEventListener('pageshow', function (e) {
     if (e.persisted || window.performance?.navigation.type === 2) {
         loadingDom.classList.add('hidden');
